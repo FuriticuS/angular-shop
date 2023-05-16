@@ -13,6 +13,9 @@ const routes: Routes = [
       {path:'product/:id', component: ProductPageComponent},
       {path:'cart', component: CartPageComponent}
     ]
+  },
+  {
+    path:'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
 ];
 
