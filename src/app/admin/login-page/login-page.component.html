@@ -1,1 +1,28 @@
-<p>login-page works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+  <h2>Login as Administrator</h2>
+
+  <div class="form-control">
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email">
+    <div *ngIf="form.get('email').touched && form.get('email').invalid" class="validation">
+      <small *ngIf="form.get('email').hasError('required')">Введите Email</small>
+      <small *ngIf="form.get('email').hasError('email')">Укажите корректный Email</small>
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password">
+    <div *ngIf="form.get('password').touched && form.get('password').invalid" class="validation">
+      <small *ngIf="form.get('password').hasError('required')">Введите Password</small>
+      <small *ngIf="form.get('password').hasError('minlength')">
+        Пароль должен состоять из  {{form.get('password').errors.minlength.requiredLength}} символов.
+        Ввели {{form.get('password').errors.minlength.actualLength}}
+      </small>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid || submitted">Logon</button>
+
+</form>
